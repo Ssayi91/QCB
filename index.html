@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Calibrations Bureau | Precision in Every Measurement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --deep-navy: #0A192F;
+            --slate-navy: #112240;
+            --crisp-white: #F8FAFC;
+            --pure-white: #FFFFFF;
+            --water-blue: #0EA5E9;
+            --water-glow: rgba(14, 165, 233, 0.15);
+            --text-dark: #1E293B;
+            --text-light: #CBD5E1;
+            --ease-fluid: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--crisp-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent { color: var(--water-blue); }
+        .text-light { color: var(--text-light); }
+
+        /* --- FLOW ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s var(--ease-fluid), transform 0.8s var(--ease-fluid);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s var(--ease-fluid);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--deep-navy);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--water-blue); }
+
+        nav { display: flex; gap: 2rem; }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--water-blue);
+            transition: width 0.3s var(--ease-fluid);
+        }
+
+        nav a:hover { color: var(--water-blue); }
+        nav a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION (Split Layout) --- */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            background: var(--pure-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Subtle zoom for story effect */
+            animation: slowZoom 25s infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .hero-content {
+            padding: 0 10%;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--water-glow);
+            color: var(--water-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            color: var(--deep-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #64748B;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            font-weight: 400;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            background: var(--water-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Wave Divider */
+        .wave-divider {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        .wave-divider .shape-fill {
+            fill: var(--deep-navy);
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-dark {
+            background: var(--deep-navy);
+            color: var(--pure-white);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--water-blue);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* --- DISCOVERY / STORY FLOW SECTIONS --- */
+        .story-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .story-block.reverse {
+            direction: rtl;
+        }
+
+        .story-block.reverse > * {
+            direction: ltr;
+        }
+
+        .story-img-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .story-img-wrapper img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--ease-fluid);
+        }
+
+        .story-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .story-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--deep-navy);
+        }
+
+        .section-dark .story-content h3 {
+            color: var(--pure-white);
+        }
+
+        .story-content p {
+            color: #64748B;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .section-dark .story-content p {
+            color: var(--text-light);
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .section-dark .feature-list li {
+            color: var(--text-light);
+        }
+
+        .feature-list li i {
+            color: var(--water-blue);
+            font-size: 0.8rem;
+        }
+
+        /* --- PARALLAX BREAK --- */
+        .parallax-break {
+            height: 50vh;
+            background: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .parallax-break::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 25, 47, 0.85);
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 5%;
+        }
+
+        .parallax-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--pure-white);
+        }
+
+        .parallax-content p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* --- CLIENTS WITH ICONS --- */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .client-card {
+            background: var(--slate-navy);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: transform 0.3s var(--ease-fluid), border-color 0.3s;
+        }
+
+        .client-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--water-blue);
+        }
+
+        .client-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--water-glow);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--water-blue);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .client-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--pure-white);
+        }
+
+        .client-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--pure-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-align: left;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover { color: var(--water-blue); }
+
+        .faq-question i {
+            transition: transform 0.3s var(--ease-fluid);
+            color: var(--water-blue);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-fluid), padding 0.4s;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.5rem;
+        }
+
+        /* --- CONTACT & MAP --- */
+        .contact-section {
+            background: var(--crisp-white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 2.2rem;
+            color: var(--deep-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-detail i {
+            color: var(--water-blue);
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+
+        .contact-detail h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--deep-navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-detail p, .contact-detail a {
+            color: #64748B;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-detail a:hover { color: var(--water-blue); }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid #E2E8F0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-fluid);
+        }
+
+        .social-links a:hover {
+            background: var(--water-blue);
+            color: white;
+            border-color: var(--water-blue);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.4s;
+        }
+
+        .map-container:hover {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--deep-navy);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* --- WHATSAPP FAB --- */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: transform 0.3s var(--ease-fluid);
+        }
+
+        .whatsapp-fab:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; }
+            .hero-image { height: 50vh; order: -1; }
+            .hero-content { padding: 3rem 5%; }
+            .story-block, .story-block.reverse { grid-template-columns: 1fr; gap: 2rem; direction: ltr; }
+            .story-block.reverse > * { direction: ltr; }
+            .feature-list { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="navbar">
+        <a href="#" class="logo">QCB<span>.</span></a>
+        <nav>
+            <a href="#discovery">Discovery</a>
+            <a href="#services">Capabilities</a>
+            <a href="#clients">Partners</a>
+            <a href="#faq">Insights</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO (Split Layout) -->
+    <section class="hero">
+        <div class="hero-image reveal">
+            <!-- Story image: Precision, focus, clean -->
+            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3dc38cd2?auto=format&fit=crop&w=1000&q=80" alt="Precision Calibration">
+        </div>
+        <div class="hero-content">
+            <div class="hero-tag reveal reveal-delay-1">
+                <i class="fas fa-certificate"></i> ISO/IEC 17025:2005(E) Compliant
+            </div>
+            <h1 class="reveal reveal-delay-2">
+                We Do It Right <br>
+                <span class="text-accent">The First Time.</span>
+            </h1>
+            <p class="reveal reveal-delay-3">
+                Quality Calibrations Bureau is a wholly Kenyan-owned organization, delivering expert metrology, nondestructive testing, and engineering quality assurance across the East African region.
+            </p>
+            <a href="https://wa.me/254710702727" class="btn-primary reveal reveal-delay-3" target="_blank">
+                <i class="fab fa-whatsapp"></i> Request Consultation
+            </a>
+        </div>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- DISCOVERY / STORY FLOW -->
+    <section id="discovery" class="section-dark">
+        <div class="section-header reveal">
+            <span class="section-label">01 // The Science of Precision</span>
+            <h2>Understanding the Impact of Exact Measurements.</h2>
+            <p>In industrial and laboratory settings, a fraction of a millimeter or a single degree of temperature can dictate product safety, regulatory compliance, and operational efficiency. We bridge the gap between theoretical standards and practical application.</p>
+        </div>
+
+        <div class="story-block reveal">
+            <div class="story-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80" alt="Laboratory Analysis">
+            </div>
+            <div class="story-content">
+                <h3>Calibration & Quality Assurance</h3>
+                <p>Accredited by the Kenya Bureau of Standards (KEBS), we ensure your instruments meet the strictest international tolerances. Our methodology guarantees that every reading is legally and scientifically defensible.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Mass & Weighing Scales</li>
+                    <li><i class="fas fa-check-circle"></i> Pressure & Temperature Gauges</li>
+                    <li><i class="fas fa-check-circle"></i> Centrifuges & pH Meters</li>
+                    <li><i class="fas fa-check-circle"></i> Tesla Meters (Heavy Metals)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="story-block reverse reveal">
+            <div class="story-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Equipment Maintenance">
+            </div>
+            <div class="story-content">
+                <h3>Repair, Maintenance & Auditing</h3>
+                <p>Beyond calibration, we provide comprehensive lifecycle management for your critical equipment. Our energy and air auditing services utilize advanced Carbon Monoxide and humidity meters to ensure workplace safety and industrial conservation.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Analog / Digital Weighing Repair</li>
+                    <li><i class="fas fa-check-circle"></i> Ovens, Incubators & Autoclaves</li>
+                    <li><i class="fas fa-check-circle"></i> Air Quality & Noise Level Mapping</li>
+                    <li><i class="fas fa-check-circle"></i> Remedial Conservation Measures</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX BREAK -->
+    <section class="parallax-break">
+        <div class="parallax-content reveal">
+            <h2>Backed by Regional & International Standards</h2>
+            <p>Our technical personnel hold advanced certifications, including specialized autoclave and sterilization training from NLA South Africa, ensuring your operations meet global benchmarks.</p>
+        </div>
+    </section>
+
+    <!-- CLIENTS WITH ICONS -->
+    <section id="clients" class="section-dark" style="background: var(--slate-navy);">
+        <div class="section-header reveal" style="margin: 0 auto 4rem; text-align: center;">
+            <span class="section-label">02 // Industry Trust</span>
+            <h2>Trusted by East Africa's Leaders.</h2>
+            <p style="margin: 0 auto;">Providing conformity and quality assurance to leading institutions across diverse sectors.</p>
+        </div>
+
+        <div class="clients-grid reveal">
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-beer-mug-empty"></i></div>
+                <div class="client-info">
+                    <h4>Kenya Breweries Ltd</h4>
+                    <p>Calibration of flow meters</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="client-info">
+                    <h4>University of Nairobi</h4>
+                    <p>Health Sciences Haematology Lab</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-cow"></i></div>
+                <div class="client-info">
+                    <h4>Githunguri Dairy (Fresha)</h4>
+                    <p>Cooler tanks & process equipment</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-helmet-safety"></i></div>
+                <div class="client-info">
+                    <h4>Sinohydro Construction Co.</h4>
+                    <p>Heavy machinery & lab equipment</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-hotel"></i></div>
+                <div class="client-info">
+                    <h4>Kempinski Hotel</h4>
+                    <p>Energy auditing & air quality</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-industry"></i></div>
+                <div class="client-info">
+                    <h4>James Finlays Kenya</h4>
+                    <p>Laboratory & process calibration</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-bottle-water"></i></div>
+                <div class="client-info">
+                    <h4>The Good Water Company</h4>
+                    <p>Quality conformity activities</p>
+                </div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-flask"></i></div>
+                <div class="client-info">
+                    <h4>Rift Valley Bottlers</h4>
+                    <p>Plant chemistry equipment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="section-dark">
+        <div class="section-header reveal" style="text-align: center; margin: 0 auto 4rem;">
+            <span class="section-label">03 // Knowledge Base</span>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-container reveal">
+            <div class="faq-item">
+                <button class="faq-question">
+                    What industries do you primarily serve?
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    We serve a wide range of industries across East Africa, including food and beverage processing, dairy, construction, hospitality, and academic research institutions. Our services are tailored to meet the specific regulatory and quality assurance needs of each sector.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Are your calibration services accredited?
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    Yes. Quality Calibrations Bureau is fully accredited by the Kenya Bureau of Standards (KEBS) and is a member of Kenya Accreditation Services (KENAS). We comply strictly with the ISO/IEC 17025:2005(E) standard for testing and calibration laboratories.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Do you offer on-site calibration and auditing?
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    Absolutely. We understand that some equipment cannot be easily transported. Our team is fully equipped to perform on-site calibration, air quality auditing, and noise level mapping at your facility to minimize operational disruption.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I request a service or get a quote?
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    You can reach out to us directly via the WhatsApp button located at the bottom right of this page, or by calling our direct line. Our technical team will assess your requirements and provide a tailored consultation.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & MAP -->
+    <section id="contact" class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <span class="section-label">04 // Get In Touch</span>
+                <h3>Let us ensure your precision.</h3>
+                <p style="color: #64748B; margin-bottom: 2.5rem; font-size: 1.05rem;">Reach out to our technical team for consultations, service requests, or equipment maintenance inquiries.</p>
+
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Headquarters</h4>
+                        <p>Outer Ring Road, Opp. Shell Petrol Station<br>P.O. BOX 54414 - 00200, Nairobi, Kenya</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>Direct Line</h4>
+                        <a href="tel:+254710702727">+254 710 702 727</a>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <a href="mailto:qcbureau269@gmail.com">qcbureau269@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div class="map-container reveal reveal-delay-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8176!2d36.89!3d-1.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNDguMCJTIDM2wrA1MycyNC4wIkU!5e0!3m2!1sen!2ske!4v1600000000000!5m2!1sen!2ske" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 QUALITY CALIBRATIONS BUREAU. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/254710702727" class="whatsapp-fab" target="_blank" aria-label="Contact via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SCROLL ANIMATION SCRIPT -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for "Water Flow" reveal animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
